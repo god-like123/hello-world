@@ -3,11 +3,10 @@ import './style.scss';
 import ReactDOM from 'react-dom';
 
 interface timerState {
-  date?: any;
-  timerID?: any;
+  date: any;
 }
 export default class Clock extends Component<{}, timerState> {
-  // timerID: ReturnType<typeof setInterval> = null;  1.
+  // 1.timerID: ReturnType<typeof setInterval> = null;  
   // 2.
   static timerID;
 
