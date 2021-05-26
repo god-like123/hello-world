@@ -9,7 +9,7 @@
 function promiseAll(promises) {
     return new Promise((resolve, reject) => {
         if (!Array.isArray(promises)) {
-            return reject(alert(123))
+            return reject(new TypeError('123'))
         }
         let count = 0;
         let newValue = new Array(promises.length);
@@ -21,7 +21,8 @@ function promiseAll(promises) {
                     if (count === promises.length) {
                         return resolve(newValue)
                     }
-                }, rej => reject(rej))
+                })
+                .catch(rej => reject(rej))
         }
     })
 }
