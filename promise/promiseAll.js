@@ -6,23 +6,55 @@
  * 所有任务完成
  */
 
-function promiseAll(promises) {
+// function promiseAll(promises) {
+//     return new Promise((resolve, reject) => {
+//         if (!Array.isArray(promises)) {
+//             return reject(new TypeError('123'))
+//         }
+//         let count = 0;
+//         let newValue = new Array(promises.length);
+//         for (let i = 0; i < promises.length; i++) {
+//             Promise.resolve(promises[i])
+//                 .then(res => {
+//                     newValue[i] = res;
+//                     count++;
+//                     if (count === promises.length) {
+//                         return resolve(newValue)
+//                     }
+//                 })
+//                 .catch(rej => reject(rej))
+//         }
+//     })
+// }
+
+
+
+function PromiseAll(promises) {
     return new Promise((resolve, reject) => {
-        if (!Array.isArray(promises)) {
-            return reject(new TypeError('123'))
+        if (Object.prototype.toString.call(promises) !== '[object Array]') {
+            return reject(alert('123'))
         }
         let count = 0;
         let newValue = new Array(promises.length);
+
         for (let i = 0; i < promises.length; i++) {
-            Promise.resolve(promises[i])
-                .then(res => {
-                    newValue[i] = res;
-                    count++;
-                    if (count === promises.length) {
-                        return resolve(newValue)
-                    }
-                })
+            Promise.resolve(promises[i]).then(res => {
+                newValue[i] = res;
+                count++;
+                if (count === promises.length) {
+                    return resolve(newValue)
+                }
+            })
                 .catch(rej => reject(rej))
         }
-    })
+    });
 }
+
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 100, 'foo');
+});
+const a = [promise1,promise2,promise3];
+
+PromiseAll(a).then(value=>console.log(value));
