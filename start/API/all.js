@@ -5,24 +5,24 @@ const arr = [1, [2, [3, [4, 5]]], 6];
 
 const res1 = arr.flat(Infinity);
 
-const res2 = JSON.stringify(arr).replace(/\[|\]/g,'').split(',');
+const res2 = JSON.stringify(arr).replace(/\[|\]/g, '').split(',');
 // ** 但是该方法会使数据类型都变成字符串
 
-const res3 = JSON.parse('[' + JSON.stringify(arr).replace(/\[|\]/g,'') + ']');
+const res3 = JSON.parse('[' + JSON.stringify(arr).replace(/\[|\]/g, '') + ']');
 
-const flatten = arr =>{
-    return arr.reduce((pre,cur)=>{
-        return pre.concat(Array.isArray(cur)?flatten(cur):cur);
-    },[])
+const flatten = arr => {
+    return arr.reduce((pre, cur) => {
+        return pre.concat(Array.isArray(cur) ? flatten(cur) : cur);
+    }, [])
 }
 const res4 = flatten(arr)
 
 const res5 = [];
-const fn = arr =>{
-    for(let i = 0; i<arr.length; i++){
-        if(Array.isArray(arr[i])) {
+const fn = arr => {
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
             fn(arr[i])
-        }else{
+        } else {
             res5.push(arr[i])
         }
     }
@@ -36,14 +36,14 @@ fn(arr)
 
 const arr1 = [1, 1, '1', 17, true, true, false, false, 'true', 'a', {}, {}];
 
-const unique1 =Array.from(new Set(arr));
+const unique1 = Array.from(new Set(arr));
 
-const unique2 = arr =>{
+const unique2 = arr => {
     let len = arr.length;
-    for(let i = 0;i<len;i++){
-        for(let j = i+1;j<len;j++){
-            if(arr[i] === arr[j]){
-                arr.splice(j,1);
+    for (let i = 0; i < len; i++) {
+        for (let j = i + 1; j < len; j++) {
+            if (arr[i] === arr[j]) {
+                arr.splice(j, 1);
                 len--;
                 j--;
             }
@@ -52,38 +52,38 @@ const unique2 = arr =>{
     return arr;
 };
 
-const unique3 = arr =>{
+const unique3 = arr => {
     const res = [];
-    for(let i =0;i<arr.length;i++){
-        if(res.indexOf(arr[i]===-1)){
+    for (let i = 0; i < arr.length; i++) {
+        if (res.indexOf(arr[i] === -1)) {
             res.push(arr[i])
         }
     }
     return res;
 };
 
-const unique4 = arr =>{
+const unique4 = arr => {
     const res = [];
-    for(let i = 0;i<arr.length;i++){
-        if(!res.includes(arr[i])){
+    for (let i = 0; i < arr.length; i++) {
+        if (!res.includes(arr[i])) {
             res.push(arr[i]);
         }
     }
     return res;
 };
 
-const unique5 = arr =>{
-    return arr.filter((item,index)=>{
+const unique5 = arr => {
+    return arr.filter((item, index) => {
         return arr.indexOf(item) === index;
     })
 };
 
-const unique6 = arr =>{
+const unique6 = arr => {
     const map = new Map();
-    const res =[];
-    for(let i = 0;i<arr.length;i++){
-        if(!map.has(arr[i])){
-            map.set(arr[i],true);
+    const res = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (!map.has(arr[i])) {
+            map.set(arr[i], true);
             res.push(arr[i]);
         }
     }
@@ -103,17 +103,17 @@ Array.prototype.slice.call(document.querySelectorAll('div'))
 
 // [...document.querySelectorAll('div')]
 
-Array.prototype.concat.apply([],document.querySelectorAll('div'));
+Array.prototype.concat.apply([], document.querySelectorAll('div'));
 
 
 /**
  * Array.prototype.filter()
  */
-Array.prototype.filter = function (callback,thisArg) {
-    if(this === undefined){
+Array.prototype.filter = function (callback, thisArg) {
+    if (this === undefined) {
         throw new TypeError('this is null or not undefined')
     }
-    if(typeof callback !== 'function'){
+    if (typeof callback !== 'function') {
         throw new TypeError(callback + 'is not a function');
     }
     const res = [];
@@ -121,9 +121,9 @@ Array.prototype.filter = function (callback,thisArg) {
     const O = Object(this);
     // >>>0 保证len为number, 且为正整数
     const len = O.length >>> 0;
-    for(let i = 0;i<len;i++){
-        if(i in O){
-            if(callback.call(thisArg,O[i],i,O)){
+    for (let i = 0; i < len; i++) {
+        if (i in O) {
+            if (callback.call(thisArg, O[i], i, O)) {
                 res.push(O[i])
             }
         }
@@ -134,19 +134,19 @@ Array.prototype.filter = function (callback,thisArg) {
 /**
  * Array.prototype.map()
  */
-Array.prototype.map = (callback,thisArg) =>{
-    if(this === undefined){
+Array.prototype.map = (callback, thisArg) => {
+    if (this === undefined) {
         throw new TypeError('this is null or not defined')
     }
-    if(typeof callback !== 'function'){
+    if (typeof callback !== 'function') {
         throw new TypeError(callback + 'is not a function');
     }
     const res = [];
     const O = Object(this);
     const len = O.length >>> 0;
-    for(let i =0;i<len;i++){
-        if(i in O){
-            res[i] = callback.call(thisArg,O[i],i,this);
+    for (let i = 0; i < len; i++) {
+        if (i in O) {
+            res[i] = callback.call(thisArg, O[i], i, this);
         }
     }
     return res;
@@ -158,8 +158,8 @@ Array.prototype.map = (callback,thisArg) =>{
  * Function.prototype.call  与之不同之处在于接收参数，接收的是一个参数列表
  * Function.prototype.call = function（context = window, ...args）
  */
-Function.prototype.apply = function (context = window,args) {
-    if(typeof this !== "function") {
+Function.prototype.apply = function (context = window, args) {
+    if (typeof this !== "function") {
         throw new TypeError('type error')
     }
     const fn = Symbol('fn');
@@ -175,17 +175,17 @@ Function.prototype.apply = function (context = window,args) {
  *
  */
 Function.prototype.bind = function (context, ...args) {
-    if(typeof this !== 'function'){
+    if (typeof this !== 'function') {
         throw new Error('Type Error');
     }
 
     var self = this;
 
     return function F() {
-        if(this instanceof F){
-            return new self(...args,...arguments)
+        if (this instanceof F) {
+            return new self(...args, ...arguments)
         }
-        return self.apply(context,[...args,...arguments])
+        return self.apply(context, [...args, ...arguments])
     }
 }
 
@@ -195,13 +195,13 @@ Function.prototype.bind = function (context, ...args) {
  * 防抖常应用于用户进行搜索输入节约请求资源，window触发 resize事件时进行防抖只触发一次
  */
 
-const debounce = (fn,time) =>{
+const debounce = (fn, time) => {
     let timeout = null;
     return function () {
         clearTimeout(timeout)
-        timeout = setTimeout(()=>{
-            fn.apply(this,arguments);
-        },time);
+        timeout = setTimeout(() => {
+            fn.apply(this, arguments);
+        }, time);
     }
 }
 
@@ -211,15 +211,15 @@ const debounce = (fn,time) =>{
  * 节流常应用于鼠标不断点击触发、监听滚动事件。
  */
 
-const throttle = (fn,time) =>{
+const throttle = (fn, time) => {
     let flag = true;
     return function () {
-        if(!flag) return;
+        if (!flag) return;
         flag = false;
-        setTimeout(()=>{
-            fn.apply(this,arguments);
+        setTimeout(() => {
+            fn.apply(this, arguments);
             flag = true;
-        },time)
+        }, time)
     }
 }
 
@@ -228,14 +228,16 @@ const throttle = (fn,time) =>{
  * 指的是将一个接受多个参数的函数变为接受一个参数返回一个函数的固定形式，
  * 这样便于再次调用，例如f(1)(2)
  */
-function add(){
+function add() {
     const _args = [...arguments];
+
     function fn() {
         _args.push(...arguments);
         return fn;
     }
+
     fn.toString = function () {
-        return _args.reduce((sum,cur)=>sum+cur);
+        return _args.reduce((sum, cur) => sum + cur);
     };
     return fn;
 }
@@ -244,12 +246,12 @@ function add(){
  * instanceof
  * instanceof 运算符用于检测构造函数的prototype属性是否出现在某个实例对象的原型链上。
  */
-const myInstanceof = (left,right)=>{
+const myInstanceof = (left, right) => {
     // 基本数据类型都返回false
-    if(typeof left !== 'object' || left === null) return false;
+    if (typeof left !== 'object' || left === null) return false;
     let proto = Object.getPrototypeOf(left);
-    while(true) {
-        if(proto === null) return false;
+    while (true) {
+        if (proto === null) return false;
         if (proto === right.prototype) return true;
         proto = Object.getPrototypeOf(proto)
     }
@@ -262,11 +264,11 @@ const myInstanceof = (left,right)=>{
  * NaN === NaN  //false
  */
 
-const is = (x,y) =>{
-    if(x===y){
+const is = (x, y) => {
+    if (x === y) {
         // +0和-0应该不相等
-        return x !==0 || y!==0 || 1/x === 1/y;
-    }else {
+        return x !== 0 || y !== 0 || 1 / x === 1 / y;
+    } else {
         return x !== x && y !== y;
     }
 }
@@ -276,7 +278,6 @@ const is = (x,y) =>{
  * Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象
  * ### 注意：该操作是浅拷贝
  */
-
 
 
 /**
@@ -289,38 +290,38 @@ const is = (x,y) =>{
  */
 
 // 1.JSON.stringify 和 JSON.parse
-deepCopy = (obj) =>{
+deepCopy = (obj) => {
     let _obj = JSON.stringify(obj);
     return JSON.parse(_obj);
 };
 
 // 2.使用递归的方式实现深拷贝
-const cloneDeep1 = (target,hash = new WeakMap()) => {
+const cloneDeep1 = (target, hash = new WeakMap()) => {
     if (typeof target !== 'object' || target === null) {
         return target;
     }
     // 哈希表中存在直接返回
     if (hash.has(target)) return hash.get(target);
-    const cloneTarget = Array.isArray(target)?[]:{};
-    hash.set(target,cloneTarget);
+    const cloneTarget = Array.isArray(target) ? [] : {};
+    hash.set(target, cloneTarget);
 
     // 针对Symbol属性
     const symKeys = Object.getOwnPropertySymbols(target);
-    if(symKeys.length){
-        symKeys.forEach(symKey =>{
-            if(typeof target[symKey] === 'object' && target[symKey] !== null){
+    if (symKeys.length) {
+        symKeys.forEach(symKey => {
+            if (typeof target[symKey] === 'object' && target[symKey] !== null) {
                 cloneTarget[symKey] = cloneDeep1(target[symKey]);
-            }else {
+            } else {
                 cloneTarget[symKey] = target[symKey]
             }
         })
     }
 
-    for(const i in target){
-        if(Object.prototype.hasOwnProperty.call(target,i)){
+    for (const i in target) {
+        if (Object.prototype.hasOwnProperty.call(target, i)) {
             cloneTarget[i] =
                 typeof target[i] === 'object' && target[i] !== null
-            ?cloneDeep1(target[i],hash) : target[i];
+                    ? cloneDeep1(target[i], hash) : target[i];
         }
     }
     return cloneTarget;
@@ -331,22 +332,22 @@ const cloneDeep1 = (target,hash = new WeakMap()) => {
  * script标签不遵循同源协议，可以用来进行跨域请求，优点就是兼容性好但仅限于GET请求
  */
 
-const jsonp = ({url,params,callbackName}) =>{
-    const generateUrl = ()=>{
+const jsonp = ({url, params, callbackName}) => {
+    const generateUrl = () => {
         let dataSrc = '';
-        for(let key in params){
-            if(Object.prototype.hasOwnProperty.call(params,key)){
+        for (let key in params) {
+            if (Object.prototype.hasOwnProperty.call(params, key)) {
                 dataSrc += `${key}=${params[key]}&`;
             }
         }
-        dataSrc +=`callback=${callbackName}`;
+        dataSrc += `callback=${callbackName}`;
         return `${url}?${dataSrc}`;
     };
     return new Promise((resolve, reject) => {
         const scriptEle = document.createElement('script');
         scriptEle.src = generateUrl();
         document.body.appendChild(scriptEle);
-        window[callbackName] = data =>{
+        window[callbackName] = data => {
             resolve(data);
             document.removeChild(scriptEle);
         }
@@ -360,13 +361,13 @@ const jsonp = ({url,params,callbackName}) =>{
 const getJSON = function (url) {
     return new Promise((resolve, reject) => {
         const xhr = XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Mscrosoft.XMLHttp');
-        xhr.open('GET',url,false);
-        xhr.setRequestHeader('Accept','application/json');
+        xhr.open('GET', url, false);
+        xhr.setRequestHeader('Accept', 'application/json');
         xhr.onreadystatechange = function () {
-            if(xhr.readyState !== 4) return;
-            if (xhr.status === 200 || xhr.status === 304 ){
+            if (xhr.readyState !== 4) return;
+            if (xhr.status === 200 || xhr.status === 304) {
                 resolve(xhr.responseText);
-            }else{
+            } else {
                 reject(new Error(xhr.responseText));
             }
         }

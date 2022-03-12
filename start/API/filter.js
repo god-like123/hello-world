@@ -7,17 +7,17 @@
 *   语法： array.filter(function(currentValue,index,arr),thisValue)
 * */
 
-Array.prototype._filter = function (fn,thisValue) {
+Array.prototype._filter = function (fn, thisValue) {
     let arr = thisValue;
     let result = [];
-    if(typeof fn !== 'function'){
-        throw new TypeError(fn+'is not a function');
+    if (typeof fn !== 'function') {
+        throw new TypeError(fn + 'is not a function');
     }
-    if(!arr.length){
+    if (!arr.length) {
         return []
     }
-    for(let i=0;i<arr.length;i++){
-        if(fn.call(arr,arr[i],i,arr)){
+    for (let i = 0; i < arr.length; i++) {
+        if (fn.call(arr, arr[i], i, arr)) {
             result.push(arr[i])
         }
     }
@@ -25,7 +25,7 @@ Array.prototype._filter = function (fn,thisValue) {
 };
 
 let arr = [];
-let result = arr._filter(item=>{
-    return item>10
-},[4,9,12,14])
-console.log(result)
+let result = arr._filter(item => {
+    return item > 10
+}, [4, 9, 12, 14]);
+console.log(result);

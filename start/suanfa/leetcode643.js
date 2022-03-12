@@ -1,22 +1,22 @@
-var findMaxAverage = function(nums, k) {
+var findMaxAverage = function (nums, k) {
     let b = [];
-    for(let i=0;i<=nums.length-k;i++){
+    for (let i = 0; i <= nums.length - k; i++) {
         let sum = 0;
-        let a = nums.slice(i,i+k);
+        let a = nums.slice(i, i + k);
         a.forEach(function (item) {
             sum += item;
         })
         b.push(sum)
     }
-    return Math.max.apply(null,b)/k
+    return Math.max.apply(null, b) / k
 };
 
-const arr = [1,12,-15,-6,50,3];
-const k =4;
-console.log(findMaxAverage(arr,k))
+const arr = [1, 12, -15, -6, 50, 3];
+const k = 4;
+console.log(findMaxAverage(arr, k))
 
 // 滑动窗口
-var _findMaxAverage = function(nums, k) {
+var _findMaxAverage = function (nums, k) {
     let sum = 0;
     const n = nums.length;
     for (let i = 0; i < k; i++) {
@@ -30,6 +30,6 @@ var _findMaxAverage = function(nums, k) {
     return maxSum / k;
 };
 
-const arr1 = [1,12,-15,-6,50,3]
+const arr1 = [1, 12, -15, -6, 50, 3]
 const t = 5;
-console.log(_findMaxAverage(arr1,t))
+console.log(_findMaxAverage(arr1, t))

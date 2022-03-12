@@ -3,17 +3,17 @@
 *   forEach()对于空数组是不会执行回调函数的
 * */
 
-Array.prototype._forEach = function (fn,thisValue) {
-    let arr = thisValue || this
-    if(typeof fn !=='function'){
+Array.prototype._forEach = function (fn, thisValue) {
+    let arr = thisValue || this;
+    if (typeof fn !== 'function') {
         throw new TypeError(fn + 'is not a function');
     }
-    for (let i=0;i<arr.length;i++){
-        fn.call(arr,arr[i],i,arr)
+    for (let i = 0; i < arr.length; i++) {
+        fn.call(arr, arr[i], i, arr)
     }
-}
-let arr = [4,9,16,25];
-arr._forEach((item,i,arr)=>{
-    console.log('item:'+item+' i:'+i)
+};
+let arr = [4, 9, 16, 25];
+arr._forEach((item, i, arr) => {
+    console.log('item:' + item + ' i:' + i);
     console.log(arr)
-})
+});

@@ -7,25 +7,26 @@
 *   every()不会改变原始数组
 * */
 
-Array.prototype._every = function(fn,thisValue){
+Array.prototype._every = function (fn, thisValue) {
     let arr = thisValue || this;
-    if(typeof fn!=='function'){
-        throw new TypeError(fn+'is not a function')
+    if (typeof fn !== 'function') {
+        throw new TypeError(fn + 'is not a function')
     }
-    if(!arr.length){
+    if (!arr.length) {
         return true
     }
-    for(let i =0;i<arr.length;i++){
-        if(!fn.call(this,arr[i],i,arr)){
+    for (let i = 0; i < arr.length; i++) {
+        if (!fn.call(this, arr[i], i, arr)) {
             return false
         }
     }
     return true
 }
 
-function checkAdult(item){
+function checkAdult(item) {
     return item >= 11
 }
-let arr =[32,33,30,21]
+
+let arr = [32, 33, 30, 21]
 let result = arr._every(checkAdult)
 console.log(result)

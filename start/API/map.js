@@ -6,25 +6,25 @@
 * */
 
 
-Array.prototype._map = function(fn,thisValue){
-    let arr = thisValue || this
-    let result = []
-    if(typeof fn !== 'function'){
+Array.prototype._map = function (fn, thisValue) {
+    let arr = thisValue || this;
+    let result = [];
+    if (typeof fn !== 'function') {
         throw new TypeError(fn + 'is not a function');
     }
-    if(!arr.length){
+    if (!arr.length) {
         return []
     }
-    for(let i=0;i<arr.length;i++){
-        let r = fn.call(arr,arr[i],...arguments)
+    for (let i = 0; i < arr.length; i++) {
+        let r = fn.call(arr, arr[i], ...arguments);
         result.push(r)
     }
     return result
 };
 
-let arr = [4,9,16,25]
-let result = arr._map(item=>{
-    return item*2;
-})
+let arr = [4, 9, 16, 25];
+let result = arr._map(item => {
+    return item * 2;
+});
 
-console.log(result)
+console.log(result);

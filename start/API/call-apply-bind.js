@@ -21,7 +21,8 @@
 
 
 function fn() {
-    var a = 1; b = 2;
+    var a = 1;
+    b = 2;
     var c = 3;
     var test = function (first, second, third) {
         return first === a && second === b && third === c;

@@ -25,7 +25,7 @@
 //
 // const nums = [-1]
 // console.log(numMax((nums)))
-var maxSubArray = function(nums) {
+var maxSubArray = function (nums) {
     // let count = 0;
     // nums.forEach(e=>{
     //     if(e<0){
@@ -37,15 +37,15 @@ var maxSubArray = function(nums) {
     // })
     let ans = nums[0];
     let sum = 0;
-    for(let num of nums){
-        if(sum>0){
+    for (let num of nums) {
+        if (sum > 0) {
             sum += num
-        }else{
+        } else {
             sum = num
         }
-        ans = Math.max(ans,sum)
+        ans = Math.max(ans, sum)
     }
     return ans
 };
-const nums = [-1,-2,-5,-3,-1,-2,-4]
-console.log(maxSubArray(nums))
+const nums = [-1, -2, -5, -3, -1, -2, -4];
+console.log(maxSubArray(nums));
